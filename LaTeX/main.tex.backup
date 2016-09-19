@@ -47,7 +47,16 @@
 
 \section{Middleware}
 
-O que é um middleware. Para que ele serve...
+A evolução das redes de computadores com o advento da internet facilitaram a ploriferação 
+de aplicações distribuídas. Sabendo que as partes interessadas de uma aplicação distribuída
+podem executar em diferentes locais físicos diversas vantagens podem ser acrescidas à aplicações
+distribuídas, como tolerância à falhas (através de replicação) e aumento de de performance através
+da paralelização de tarefas, por exemplo.\\
+Analisando ambientes onde os Sistemas Distribuídos são executados, nota-se uma heterogeneidade
+entre os dispositivos que estão se comunicando. Podem existir, em um mesmo Sistema Distribuído, diferentes plataformas de hardware, tecnologias de rede, sistemas operacionais e linguagens de programação. Essas particularidades podem tornar o desenvolvimento de um SD grande desafio  (Extraído do Livro Distributed Systems Architecture).\\
+É notável, portanto, que para propiciar o desenvolvimento de uma aplicação distribuida se faz necessária uma infraestrutura adequada, que permita para o desenvolvimento e execução de um SD. Essa infraestrutura necessária é fornecida por um middleware. Um middleware é uma camada de software que reside entre a aplicação e a API de acesso à rede, sendo responsável por abstrair os detalhes de rede que podem ser ignorados pela aplicação.\\
+A rede simplesmente fornece o acesso à camada de transporte, e o acesso à ela difere dependendo da tecnologia e da plataforma física utilizadas. O Middleware homogeniza o acesso às redes, oferecendo serviços genéricos às aplicações. Além de interligar diferentes domínios de tecnologias e encapsular as diferenças entre os sistemas. (Extraído do Livro Distributed Systems Architecture)\\
+(Inserir Figura Aqui.)
 
 \section{ZeroMQ} \label{sec:firstpage}
 
