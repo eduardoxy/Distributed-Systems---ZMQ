@@ -38,25 +38,60 @@
 \maketitle
 
 \begin{abstract}
-  Abstract text
+  Abstract text.
 \end{abstract}
      
 \begin{resumo} 
-  Texto do resumo
+  Texto do resumo.
 \end{resumo}
 
 \section{Middleware}
-
 A evolução das redes de computadores com o advento da internet facilitaram a ploriferação 
-de aplicações distribuídas. Sabendo que as partes interessadas de uma aplicação distribuída
-podem executar em diferentes locais físicos diversas vantagens podem ser acrescidas à aplicações
-distribuídas, como tolerância à falhas (através de replicação) e aumento de de performance através
-da paralelização de tarefas, por exemplo.\\
-Analisando ambientes onde os Sistemas Distribuídos são executados, nota-se uma heterogeneidade
-entre os dispositivos que estão se comunicando. Podem existir, em um mesmo Sistema Distribuído, diferentes plataformas de hardware, tecnologias de rede, sistemas operacionais e linguagens de programação. Essas particularidades podem tornar o desenvolvimento de um SD grande desafio  (Extraído do Livro Distributed Systems Architecture).\\
-É notável, portanto, que para propiciar o desenvolvimento de uma aplicação distribuida se faz necessária uma infraestrutura adequada, que permita para o desenvolvimento e execução de um SD. Essa infraestrutura necessária é fornecida por um middleware. Um middleware é uma camada de software que reside entre a aplicação e a API de acesso à rede, sendo responsável por abstrair os detalhes de rede que podem ser ignorados pela aplicação.\\
-A rede simplesmente fornece o acesso à camada de transporte, e o acesso à ela difere dependendo da tecnologia e da plataforma física utilizadas. O Middleware homogeniza o acesso às redes, oferecendo serviços genéricos às aplicações. Além de interligar diferentes domínios de tecnologias e encapsular as diferenças entre os sistemas. (Extraído do Livro Distributed Systems Architecture)\\
-(Inserir Figura Aqui.)
+de aplicações distribuídas. Sabendo que as partes interessadas de uma aplicação
+distribuída podem executar em diferentes locais físicos diversas vantagens podem ser
+acrescidas à aplicações distribuídas, como tolerância à falhas (através de replicação) e
+aumento de de performance através da paralelização de tarefas, por exemplo.
+
+Analisando ambientes onde os Sistemas Distribuídos são executados, nota-se uma
+heterogeneidade entre os dispositivos que estão se comunicando. Podem existir, em um 
+mesmo Sistema Distribuído, diferentes plataformas de hardware, tecnologias de rede,
+sistemas operacionais e linguagens de programação. Essas particularidades podem tornar o
+desenvolvimento de um SD grande desafio  (Extraído do Livro Distributed Systems
+Architecture).
+
+É notável, portanto, que para propiciar o desenvolvimento de uma aplicação distribuida se
+faz necessária uma infraestrutura adequada, que permita para o desenvolvimento e execução
+de um SD. Essa infraestrutura necessária é fornecida por um middleware. Um middleware é
+uma camada de software que reside entre a aplicação e a API de acesso à rede, sendo
+responsável por abstrair os detalhes de rede que podem ser ignorados pela aplicação.
+
+A rede simplesmente fornece o acesso à camada de transporte, e o acesso à ela difere
+dependendo da tecnologia e da plataforma física utilizadas. O Middleware homogeniza o
+acesso às redes, oferecendo serviços genéricos às aplicações. Além de interligar
+diferentes domínios de tecnologias e encapsular as diferenças entre os sistemas. (Extraído
+do Livro Distributed Systems Architecture)(Inserir Figura Aqui.)
+Como o middleware é uma interface entre a API de acesso à rede e a aplicação, ele possui
+duas visões: a visão do programador da aplicação e a visão do programador do sistema.
+
+% Imagem da ilustração de um middleware.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{fig1.jpg}
+\caption{Arquitetura básica de um middleware}
+\label{fig:exampleFig1}
+\end{figure}
+
+O programador da aplicação vê o Middleware como uma ferramenta de auxílio para o
+desenvolvimento de aplicações distribuídas. Estes programadores não estão interessados
+como que o Middleware é implementado mas sim em como ele é implementado. O Middleware é
+uma caixa-preta para o programador da aplicação, com uma interface de acesso bem definida.
+
+O programador de sistemas vai além. Para ele o Middleware é uma caixa-branca e seu
+interesse maior não está em como o esta caixa interage com o mundo externo, mas sim em
+como ocorrem os processos internos nela. A aplicação que utilizará o Middleware, para o
+programador de sistemas, tem uma importância menor. O ponto de referência comum à ambos,
+programador de sistema e de aplicações, é a interface fornecida pelo middleware que será
+utilizada pelas aplicações.
 
 \section{ZeroMQ} \label{sec:firstpage}
 
@@ -79,13 +114,6 @@ Figure and table captions should be centered if less than one line
 both margins, as shown in Figure~\ref{fig:exampleFig2}. The caption font must
 be Helvetica, 10 point, boldface, with 6 points of space before and after each
 caption.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.5\textwidth]{fig1.jpg}
-\caption{A typical figure}
-\label{fig:exampleFig1}
-\end{figure}
 
 \begin{figure}[ht]
 \centering
