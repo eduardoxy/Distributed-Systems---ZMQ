@@ -75,7 +75,7 @@ duas visões: a visão do programador da aplicação e a visão do programador d
 
 O programador da aplicação vê o Middleware como uma ferramenta de auxílio para o
 desenvolvimento de aplicações distribuídas. Estes programadores não estão interessados
-como que o Middleware é implementado mas sim em como ele é implementado. O Middleware é
+como que o Middleware é implementado mas sim como obter acesso prático aos seus recursos. O Middleware é
 uma caixa-preta para o programador da aplicação, com uma interface de acesso bem definida.
 
 O programador de sistemas vai além. Para ele o Middleware é uma caixa-branca e seu
@@ -85,11 +85,60 @@ programador de sistemas, tem uma importância menor. O ponto de referência comu
 programador de sistema e de aplicações, é a interface fornecida pelo middleware que será
 utilizada pelas aplicações.
 
-\section{ZeroMQ} \label{sec:firstpage}
+\section{Um pouco sobre Filas de Mensagens}
+Filas de Mensagens, ou message queues, são conhecidas tecnicamente como FIFO (First In First Out) consistem
+em uma estrutura de dados bem definida e estudada. Diferentes formas de implementação de FIFO, como filas de 
+prioridades e filas duplamente terminadas (deque - Double End Queue), já estão consolidadas na implementação
+de algoritmos para troca de dados. A ideia de uma fila de mensagens é simples: a informação é armazenada na 
+fila e é buscada quando estiver pronta ou quando o requisitante da informação à solicitar.
 
-text
+Embora a ideia seja simples, à implementação nem sempre é trivial. Para implementar uma fila de mensagens simples
+em memória alguns problemas podem surgir, como quedas de energia elétrica ou falhas de hardware, e o conteúdo 
+inteiro da fila será perdido. Quando isso ocorre o programa que está à espera de uma mensagem daquela fila 
+corrompida não receberá nenhuma mensagem.
+
+Para contornar estes problemas que se utilizam dispositivos que implementam filas de mensagens. Ao adotar um
+dispositivo que gerencia uma fila de mensagem, se tem uma garantia à priori de que todas as mensagens serão 
+entregues ao seu destino independentemente do que aconteça. As filas de mensagens tem um papel importantíssimo
+em Sistemas Distribuídos: habilitar a comunicação assíncrona de processos.
+
+(Colar Figura de uma Fila)
+
+Ao invés de utilizar um componente que implemente uma fila de mensagens podem ser utilizadas abordagens como 
+uma thread que gerencia uma fila de mensagens ou até diversas threads para gerenciar uma fila de mensagens.
+Porém estas abordagens trazem pontos fracos. Em um sistema single-threaded a aplicação pode não ser capaz de
+processar todas as requisições quando o número de clientes for muito grande. Em um sistema multi-threaded a 
+aplicação pode ficar vulnerável à um ataque de negação de serviço (Distributed Denial of Service - DDoS). 
+Além de que todas as informações da fila poderão ser perdidas em caso de uma falha de energia ou falha de 
+hardware. Portanto é imprescindível para a execução de um sistema distribuído a utilização de um sistema de 
+fila de mensagens confiável.
+
+\section{ZeroMQ} \label{sec:firstpage}
+O ZeroMQ é um software opensource apoiado por uma comunidade ativa e com suporte comercial pago. 
+Ele fornece ferramentas para construção de arquiteturas centralizadas, distribuídas, pequenas ou grandes.
+Pode transmitir as mensagens através de IPC, TCP, TIPC e multicast. O ZeroMQ fornece padrões como 
+publish-subscriber, push-pull, e router-dealer além de mecanismos de entrada e saída de alta velocidade.
+
+A definição formal do ZeroMQ é a seguinte: o ZeroMQ é uma biblioteca de mensagem feita para
+ajudar os desenvolvedores a projetarem aplicações distribuídas e concorrentes. Embora o ZeroMQ, 
+chamado daqui para frente de ZMQ, seja similar à uma fila de mensagens (ou message queue), é
+importante deixar claro que ele não é um sistema de fila como o ActiveMQ, WebSphereMQ ou RabbitMQ.
+O ZMQ é diferente. O ZMQ fornece todas as ferramentas necessárias para que o desenvolvedor desenvolva
+o seu próprio sistema de fila de mensagens, ou seja, o ZMQ é uma biblioteca.
+O ZMQ é uma biblioteca desenvolvida nativamente na linguagem C e roda em diversas plataformas. 
+Atualmente ele oferece suporte à mais de vinte linguagens de programação, entre elas estão C/C++, Ruby, 
+PHP, Python, Node.js entre outras.
+
+O ZMQ é uma biblioteca simples. Operações de entrada e saída assíncronas pode enfileirar mensagens em
+uma thread para tratamento de entrada e saídas. Estas threads trabalham de maneira assíncronas quando 
+tratam o fluxo da rede, deixando o restante do trabalho para ser realizado pelo desenvolvedor. O ZMQ 
+oferece uma interface simplificada para trabalhar com sockets se comparada às diretivas utilizadas
+na linguagem C, por exemplo.
 
 \subsection{Histórico}
+Pieter Hintjens, especialista em sistemas distribuídos e responsável pela modelagem de 
+
+
 \subsection{Aplicações}
 \subsection{Operação}
 
