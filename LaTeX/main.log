@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.8.15)  3 OCT 2016 15:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.8.15)  3 OCT 2016 15:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -467,7 +467,7 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 40.
 
-Underfull \hbox (badness 1215) in paragraph at lines 41--46
+Underfull \hbox (badness 1215) in paragraph at lines 41--42
 \OT1/ptm/m/n/12 A evolu[][]ao das re-des de com-puta-dores com o ad-vento da in
 -ter-net fa-cil-i-taram a
  []
@@ -476,50 +476,50 @@ Underfull \hbox (badness 1215) in paragraph at lines 41--46
 File: Img_Middleware_Arc.png Graphic file (type png)
 
 <use Img_Middleware_Arc.png>
-Package pdftex.def Info: Img_Middleware_Arc.png used on input line 64.
+Package pdftex.def Info: Img_Middleware_Arc.png used on input line 52.
 (pdftex.def)             Requested size: 213.39568pt x 104.68651pt.
-LaTeX Font Info:    Try loading font information for OT1+phv on input line 65.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 53.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 65.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 53.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 <Img_MsgQueue.png, id=15, 661.0296pt x 159.9576pt>
 File: Img_MsgQueue.png Graphic file (type png)
  <use Img_MsgQueue.png>
-Package pdftex.def Info: Img_MsgQueue.png used on input line 88.
+Package pdftex.def Info: Img_MsgQueue.png used on input line 70.
 (pdftex.def)             Requested size: 213.39568pt x 51.63657pt.
 
 [2 <./Img_Middleware_Arc.png>] [3 <./Img_MsgQueue.png>] [4]
 <batching.png, id=28, 670.26883pt x 613.58647pt>
 File: batching.png Graphic file (type png)
  <use batching.png>
-Package pdftex.def Info: batching.png used on input line 124.
+Package pdftex.def Info: batching.png used on input line 107.
 (pdftex.def)             Requested size: 213.39568pt x 195.34988pt.
 
 <cfs.png, id=29, 365.365pt x 64.24pt>
 File: cfs.png Graphic file (type png)
  <use cfs.png>
-Package pdftex.def Info: cfs.png used on input line 142.
+Package pdftex.def Info: cfs.png used on input line 127.
 (pdftex.def)             Requested size: 213.39568pt x 37.51996pt.
  [5 <./batching.png>]
-Underfull \hbox (badness 5908) in paragraph at lines 156--160
+Underfull \hbox (badness 5908) in paragraph at lines 141--145
 \OT1/ptm/m/n/12 introduction https://www.digitalocean.com/community/tutorials/h
 ow-to-work-with-the-
  []
 
 
-Underfull \hbox (badness 3333) in paragraph at lines 162--165
+Underfull \hbox (badness 3333) in paragraph at lines 146--149
 []\OT1/ptm/m/n/12 Bibliographic ref-er-ences must be un-am-bigu-ous and uni-for
 m. We rec-
  []
 
 
-Underfull \hbox (badness 3138) in paragraph at lines 162--165
+Underfull \hbox (badness 3138) in paragraph at lines 146--149
 \OT1/ptm/m/n/12 om-mend giv-ing the au-thor names ref-er-ences in brack-ets, e.
 g. [[]],
  []
@@ -542,7 +542,7 @@ ive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a
 .pfb>
-Output written on main.pdf (6 pages, 196123 bytes).
+Output written on main.pdf (6 pages, 196150 bytes).
 PDF statistics:
  64 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream
