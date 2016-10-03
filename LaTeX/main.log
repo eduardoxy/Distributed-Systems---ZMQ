@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.8.15)  28 SEP 2016 15:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.8.15)  3 OCT 2016 15:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -488,23 +488,25 @@ LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10> not available
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<Img_MsgQueue.jpg, id=15, 963.6pt x 722.7pt>
-File: Img_MsgQueue.jpg Graphic file (type jpg)
- <use Img_MsgQueue.jpg>
-Package pdftex.def Info: Img_MsgQueue.jpg used on input line 88.
-(pdftex.def)             Requested size: 213.39568pt x 160.0421pt.
- [2 <./Img_Middleware_Arc.png>] [3 <./Img_MsgQueue.jpg>] [4]
-<batching.png, id=27, 670.26883pt x 613.58647pt>
+<Img_MsgQueue.png, id=15, 661.0296pt x 159.9576pt>
+File: Img_MsgQueue.png Graphic file (type png)
+ <use Img_MsgQueue.png>
+Package pdftex.def Info: Img_MsgQueue.png used on input line 88.
+(pdftex.def)             Requested size: 213.39568pt x 51.63657pt.
+
+[2 <./Img_Middleware_Arc.png>] [3 <./Img_MsgQueue.png>] [4]
+<batching.png, id=28, 670.26883pt x 613.58647pt>
 File: batching.png Graphic file (type png)
  <use batching.png>
 Package pdftex.def Info: batching.png used on input line 124.
 (pdftex.def)             Requested size: 213.39568pt x 195.34988pt.
- [5 <./batching.png>] <cfs.png, id=31, 365.365pt x 64.24pt>
+
+<cfs.png, id=29, 365.365pt x 64.24pt>
 File: cfs.png Graphic file (type png)
  <use cfs.png>
 Package pdftex.def Info: cfs.png used on input line 142.
 (pdftex.def)             Requested size: 213.39568pt x 37.51996pt.
-
+ [5 <./batching.png>]
 Underfull \hbox (badness 5908) in paragraph at lines 156--160
 \OT1/ptm/m/n/12 introduction https://www.digitalocean.com/community/tutorials/h
 ow-to-work-with-the-
@@ -524,8 +526,8 @@ g. [[]],
 
 (./main.bbl) [6 <./cfs.png>] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 2886 strings out of 495004
- 39655 string characters out of 6180662
+ 2885 strings out of 495004
+ 39651 string characters out of 6180662
  106166 words of memory out of 5000000
  6042 multiletter control sequences out of 15000+600000
  21033 words of font info for 44 fonts, out of 8000000 for 9000
@@ -540,9 +542,9 @@ ive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a
 .pfb>
-Output written on main.pdf (6 pages, 223113 bytes).
+Output written on main.pdf (6 pages, 196123 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
+ 64 PDF objects out of 1000 (max. 8388607)
  40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
