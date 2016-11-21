@@ -41,7 +41,7 @@ int main (void)
 
     /* Faz um loop infinito (fritando a CPU) aguardando recebimento de mensagens */
     while (1) {
-        char buffer [16];
+        char buffer [256];
 
         /* int zmq_recv (void *socket, zmq_msg_t *msg, int flags); 
         Recebe a mensagem do socket.
