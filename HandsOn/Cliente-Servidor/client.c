@@ -11,8 +11,8 @@ int main (void)
     printf ("Connecting to ping server...\n");
     void *context = zmq_ctx_new ();
     void *requester = zmq_socket (context, ZMQ_REQ);
-    zmq_connect (requester, "tcp://31.220.108.114:5555");
-    //zmq_connect (requester, "tcp://localhost:5555");
+    //zmq_connect (requester, "tcp://31.220.108.114:5555");
+    zmq_connect (requester, "tcp://localhost:5555");
 
     int request_nbr;
     char buffer [10];
