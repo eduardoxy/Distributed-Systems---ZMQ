@@ -32,7 +32,7 @@ extern "C" {
 
 #define IP_DEFAULT      "localhost\0"
 #define PORT_DEFAULT    "5555\0"
-#define TCP_IPDEFAULT   "127.0.0.1"
+#define TCP_IPDEFAULT   "127.0.0.1\0"
 #define TCP_PORTDEFAULT 5555
 #define ACK_CHARACTER   '\t'
 
