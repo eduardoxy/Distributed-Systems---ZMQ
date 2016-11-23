@@ -53,7 +53,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lzmq
+LDLIBSOPTIONS=-lzmq -lm
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}

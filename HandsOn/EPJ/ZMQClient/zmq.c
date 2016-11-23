@@ -6,10 +6,20 @@
 
 #include "zmq.h"
 
-char *s_recv(void *socket, int *msg_size)
+unsigned long long int ipow(int base, int exp)
 {
-    zmq_msg_t   msg;
-    int         size;
+    unsigned long long int result = 1ULL;
+    
+    while (exp-- >= 1)
+        result *= base;
+    
+    return result;
+}
+
+char *s_recv(void *socket, long long int *msg_size)
+{
+    zmq_msg_t       msg;
+    long long int   size;
     
     zmq_msg_init(&msg);
     size = zmq_msg_recv(&msg, socket, 0);
@@ -24,10 +34,10 @@ char *s_recv(void *socket, int *msg_size)
     return (string);
 }
 
-int s_send(void *socket, char *string, int size)
+long long int s_send(void *socket, char *string, long long int size)
 {
-    zmq_msg_t   msg;
-    int         size_sent;
+    zmq_msg_t       msg;
+    long long int   size_sent;
     
     zmq_msg_init_size(&msg, size);
     memcpy(zmq_msg_data(&msg), string, size);
@@ -40,7 +50,8 @@ int s_send(void *socket, char *string, int size)
 
 char *buildRequest(int mult)
 {
-    const char REQ_MSG[] = "Hi! I'm the client!\0";
+    //const char REQ_MSG[] = "Hi! I'm the client!\0";
+    const char REQ_MSG[] = "a\0";
     char *req;
     int  size;
     int  length;
@@ -57,7 +68,32 @@ char *buildRequest(int mult)
     return req;
 }
 
-char *buildReply(int repNbr)
+char *buildRequestExp(int exp)
+{
+    //const char REQ_MSG[] = "Hi! I'm the client!\0";
+    const char              REQ_MSG[] = "AA\0";
+    char                    *req;
+    unsigned long int       size;
+    unsigned long int       length;
+    int                     i;
+    
+    length = strlen(REQ_MSG);
+    size = ((sizeof(char)) * (ipow(length, exp))) + 1;
+    req = malloc(size);
+    memset(req, 0, size);
+    
+    memcpy(req, REQ_MSG, length);
+    for (i = 1; i < exp; i++)
+    {
+        length = strlen(req);
+        memcpy(&req[length], req, length);
+    }
+    req[size - 1] = 0;
+
+    return req;
+}
+
+char *buildReply(void)
 {
     const char REP_MSG[] = "Hi! I'm the server and I have received your request successfully!\0";
     char *rep;
@@ -71,4 +107,28 @@ char *buildReply(int repNbr)
     rep[size - 1] = 0;
 
     return rep;
+}
+
+char *getIPAddress(int argc, char **argv)
+{
+    const char URL_PREFIX[] = "tcp://";
+    char *url;
+    char *host;
+    char *port;
+    int   length;
+    int   size;
+    
+    if (argc == 2)
+        host = argv[1];
+    else
+        host = IP_DEFAULT;
+    port = PORT_DEFAULT;
+    
+    length = strlen(URL_PREFIX) + strlen(host) + 1 + strlen(port) + 1;
+    size = (sizeof(char) * length);
+    
+    url = malloc(size);
+    sprintf(url, "%s%s:%s", URL_PREFIX, host, port);
+    
+    return url;
 }

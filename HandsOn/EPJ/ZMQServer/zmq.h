@@ -22,10 +22,17 @@ extern "C" {
 #include <zmq.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
-char    *s_recv(void *socket, int *msg_size);
-int     s_send(void *socket, char *string, int size);
-char    *buildRequest(int mult);
+#define IP_DEFAULT      "localhost\0"
+#define PORT_DEFAULT    "5555\0"
+
+char                    *s_recv(void *socket, long long int *msg_size);
+long long int           s_send(void *socket, char *string, long long int size);
+char                    *buildRequest(int mult);
+char                    *buildReply(void);
+char                    *buildRequestExp(int exp);
+char                    *getIPAddress(int argc, char **argv);
 
 #ifdef __cplusplus
 }

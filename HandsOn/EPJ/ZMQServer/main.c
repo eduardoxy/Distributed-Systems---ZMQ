@@ -21,13 +21,13 @@
  */
 int main(int argc, char** argv) 
 {
-    void *context;
-    void    *socket;
-    int     retCode;
-    char    *request;
-    char    *reply;
-    int     sizeRequest;
-    int     successful;
+    void                    *context;
+    void                    *socket;
+    long long int           retCode;
+    char                    *request;
+    char                    *reply;
+    unsigned long long int  sizeRequest;
+    int                     successful;
     
     successful = 0;
     // Get a context
@@ -39,12 +39,13 @@ int main(int argc, char** argv)
     retCode = zmq_bind(socket, "tcp://*:5555");
     // Check if the bind was successful
     assert(retCode == 0);
-    printf("Server is running\n");
+    printf("Server is running\n#######\n");
     
     while (1)
     {
         request = s_recv(socket, &sizeRequest);
-        printf("Request received!\n");
+        printf("Request received! Msg size -> %lld\n", sizeRequest);
+        free(request);
         
         reply = buildReply();
         retCode = s_send(socket, reply, strlen(reply));
@@ -52,6 +53,7 @@ int main(int argc, char** argv)
             successful++;
         else
             printf("Error sending the reply!");
+        free(reply);
     }
     
     // destroy the socket
