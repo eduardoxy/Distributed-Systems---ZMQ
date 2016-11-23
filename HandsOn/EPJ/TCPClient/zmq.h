@@ -28,7 +28,7 @@ extern "C" {
 #ifndef DEBUG
 #define PRODUCTION
 #endif
-#define WASTE_OF_MEMORY
+//#define WASTE_OF_MEMORY
 
 #define IP_DEFAULT      "localhost\0"
 #define PORT_DEFAULT    "5555\0"
