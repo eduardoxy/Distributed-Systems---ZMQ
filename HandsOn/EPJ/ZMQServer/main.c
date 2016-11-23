@@ -45,7 +45,10 @@ int main(int argc, char** argv)
     {
         request = s_recv(socket, &sizeRequest);
         printf("Request received! Msg size -> %lld\n", sizeRequest);
+#ifndef WASTE_OF_MEMORY
+    // Now the request is useless!
         free(request);
+#endif
         
         reply = buildReply();
         retCode = s_send(socket, reply, strlen(reply));
@@ -53,7 +56,10 @@ int main(int argc, char** argv)
             successful++;
         else
             printf("Error sending the reply!");
+#ifndef WASTE_OF_MEMORY
+        // Now the request is useless!
         free(reply);
+#endif
     }
     
     // destroy the socket

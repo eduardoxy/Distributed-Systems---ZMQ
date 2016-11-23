@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+#include <sys/socket.h>
+
 #include "zmq.h"
 
 unsigned long long int ipow(int base, int exp)
@@ -14,6 +16,15 @@ unsigned long long int ipow(int base, int exp)
         result *= base;
     
     return result;
+}
+
+double getDuration(const struct timeval *tStart, const struct timeval *tEnd)
+{
+    if ((tStart == NULL) || (tEnd == NULL))
+        return -1;
+    else
+        return (tEnd->tv_sec - tStart->tv_sec) + 
+            (tEnd->tv_usec - tStart->tv_usec) * 1e-6;
 }
 
 char *s_recv(void *socket, long long int *msg_size)
@@ -50,7 +61,6 @@ long long int s_send(void *socket, char *string, long long int size)
 
 char *buildRequest(int mult)
 {
-    //const char REQ_MSG[] = "Hi! I'm the client!\0";
     const char REQ_MSG[] = "a\0";
     char *req;
     int  size;
@@ -70,7 +80,6 @@ char *buildRequest(int mult)
 
 char *buildRequestExp(int exp)
 {
-    //const char REQ_MSG[] = "Hi! I'm the client!\0";
     const char              REQ_MSG[] = "AA\0";
     char                    *req;
     unsigned long int       size;
@@ -95,7 +104,7 @@ char *buildRequestExp(int exp)
 
 char *buildReply(void)
 {
-    const char REP_MSG[] = "Hi! I'm the server and I have received your request successfully!\0";
+    const char REP_MSG[] = "OK\0";
     char *rep;
     int  size;
     int  length;
@@ -131,4 +140,80 @@ char *getIPAddress(int argc, char **argv)
     sprintf(url, "%s%s:%s", URL_PREFIX, host, port);
     
     return url;
+}
+
+char *getIPAddressTCPServer(int argc, char **argv)
+{
+    char *buf;
+    char *host;
+    int   size;
+    
+    if (argc == 2)
+        host = argv[1];
+    else
+        host = TCP_IPDEFAULT;
+    
+    size = (sizeof(char) * (strlen(host) + 1));
+    
+    buf = malloc(size);
+    sprintf(buf, "%s", host);
+    
+    return buf;
+}
+
+char *tcp_recv(int socket, unsigned long long int *sizeRead)
+{
+    const int               BUF_SIZE = 10;
+    int                     received;
+    unsigned long long int  pOffset;
+    char                    *buf;
+    unsigned long long int  sizeBuf;
+    char                    *temp;
+    
+    *(sizeRead) = 0;
+    sizeBuf = BUF_SIZE;
+    pOffset = 0;
+    buf = malloc(sizeof(char) * (sizeBuf + 1));
+    memset(buf, 0, sizeof(char) * (sizeBuf + 1));
+
+    while ((received = recv(socket, &buf[pOffset], sizeBuf - pOffset, 0)) > 0)
+    {
+        pOffset += received;
+        if (pOffset == sizeBuf)
+        {
+            sizeBuf *= BUF_SIZE;
+            temp = malloc(sizeof(char) * (sizeBuf + 1));
+            memset(temp, 0, sizeof(char) * (pOffset + 1));
+            memcpy(temp, buf, pOffset);
+            free(buf);
+            buf = temp;
+        }
+        if (strstr(buf, "\t\0") != NULL)
+        {
+            buf[--pOffset] = '\0';
+            break;
+        }
+    }
+    *(sizeRead) = pOffset;
+    
+    if (pOffset == 0)
+    {
+        free(buf);
+        return NULL;
+    }
+    else
+        return buf;
+}
+
+int tcp_send(int socket, char *buf, unsigned long long int length)
+{
+    char    *cBuf;
+    int     sSent;
+    
+    cBuf = malloc(sizeof(char) * (length + 1));
+    memcpy(cBuf, buf, length);
+    cBuf[length] = ACK_CHARACTER;
+    sSent = send(socket, cBuf, length + 1, 0);
+    
+    return !(sSent == length + 1);
 }

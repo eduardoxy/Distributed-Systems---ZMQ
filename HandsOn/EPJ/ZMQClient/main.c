@@ -19,24 +19,20 @@
 #include "zmq.h"
 
 
+int doRequest(void *socket, char *request, double *timeElapsed);
 double getDuration(const struct timeval *tStart, const struct timeval *tEnd);
-
 /*
  * 
  */
 int main(int argc, char** argv) 
 {
-    struct timeval  tStart;
-    struct timeval  tEnd;
-    char           *answer;
     char           *request;
     char           *url;
-    long long int   size;
-    long long int   expectedSize;
     void           *context;
     void           *socket;
     int             success;
     int             msgExp;
+    double          timeElapsed;
     
     success = 0;
     msgExp = 0;
@@ -48,40 +44,29 @@ int main(int argc, char** argv)
     // Open a request socket
     socket = zmq_socket(context, ZMQ_REQ);
     
-    
-    //printf("Trying to connect to ping server on [%s]\n", url);
+#ifdef DEBUG
+    printf("Connecting to ping server on [%s]\n", url);
+#endif
     // Connect to the server
     zmq_connect(socket, url);
-    //printf("Connection established\n");
-    printf("DataSize(2^x);Time Elapsed\n");
-    while (msgExp++ < 30)
+#ifdef DEBUG
+    printf("Connection established\n");
+#else
+    printf("DataSize(Bytes);Time Elapsed\n");
+#endif
+
+    request = buildRequestExp(1);
+    success = (!doRequest(socket, request, &timeElapsed) ? ++success : success);
+    
+    while (msgExp++ < 29)
     {
         // Prepare the message
         request = buildRequestExp(msgExp);
-        expectedSize = strlen(request);
-
-        // Sending the message
-        gettimeofday(&tStart, NULL);
-        size = s_send(socket, request, expectedSize);
-        if (size == expectedSize)
-            success++;
-        else
-            printf("Error sending the message!\n");
-        // Now the request is useless!
-        free(request);
-        
-        answer = s_recv(socket, &size);
-        gettimeofday(&tEnd, NULL);
-        // Answer received!
-        if (answer != NULL)
-        {
-            printf("%d;%.09f\n", success, getDuration(&tStart, &tEnd));
-            //printf("[%09d] Time used -> %.06f\n", success, getDuration(&tStart, &tEnd));
-        }
-        // Now the answer is useless!
-        free(answer);
+        success = (!doRequest(socket, request, &timeElapsed) ? ++success : success);
     }
-    //printf("%d successful messages!\n", success);
+#ifdef DEBUG
+    printf("%d successful messages!\n", success);
+#endif
     
     // Close the socket
     zmq_close(socket);
@@ -90,11 +75,50 @@ int main(int argc, char** argv)
     
 }
 
-double getDuration(const struct timeval *tStart, const struct timeval *tEnd)
+int doRequest(void *socket, char *request, double *timeElapsed)
 {
-    if ((tStart == NULL) || (tEnd == NULL))
-        return -1;
-    else
-        return (tEnd->tv_sec - tStart->tv_sec) + 
-            (tEnd->tv_usec - tStart->tv_usec) * 1e-6;
+    struct timeval  tStart;
+    struct timeval  tEnd;
+    long long int   size;
+    long long int   expectedSize;
+    int             retCode;
+    char            *answer;
+    
+    *(timeElapsed) = 0;
+    expectedSize = strlen(request);
+    // Sending the message
+    gettimeofday(&tStart, NULL);
+    size = s_send(socket, request, expectedSize);
+#ifndef WASTE_OF_MEMORY
+    // Now the request is useless!
+    free(request);
+#endif
+    retCode = !(size == expectedSize);
+    if (retCode != 0)
+    {
+#ifdef DEBUG
+        printf("Error sending the message!\n");
+#endif
+        return retCode;
+    }
+        
+    answer = s_recv(socket, &size);
+    gettimeofday(&tEnd, NULL);
+    // Answer received!
+    if (answer != NULL)
+    {
+        *(timeElapsed) = getDuration(&tStart, &tEnd);
+#ifdef DEBUG
+        printf("[%llu] Time Elapsed -> %.06f\n", expectedSize, *timeElapsed);
+#else
+        printf("%llu;%.06f\n", expectedSize, getDuration(&tStart, &tEnd));
+#endif
+    }
+#ifndef WASTE_OF_MEMORY
+    // Now the request is useless!
+    free(answer);
+#endif
+    
+    return 0;
 }
+
